@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4 text-center">Teacher Dashboard - Quiz Results</h1>
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border p-2">Student ID</th>
+          <th class="border p-2">Score</th>
+          <th class="border p-2">Total</th>
+          <th class="border p-2">Percentage</th>
+          <th class="border p-2">Timestamp</th>
+          <th class="border p-2">Incorrect Answers</th>
+        </tr>
+      </thead>
+      <tbody id="results-table"></tbody>
+    </table>
+  </div>
+  <script>
+    async function loadResults() {
+      try {
+        const response = await fetch('/api/quiz/results');
+        const results = await response.json();
+        const tableBody = document.getElementById('results-table');
+        tableBody.innerHTML = '';
+        results.forEach(result => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="border p-2">${result.studentId}</td>
+            <td class="border p-2">${result.score}</td>
+            <td class="border p-2">${result.totalQuestions}</td>
+            <td class="border p-2">${result.percentage}%</td>
+            <td class="border p-2">${new Date(result.timestamp).toLocaleString()}</td>
+            <td class="border p-2">
+              ${result.incorrectAnswers.map(item => `
+                <div>
+                  <p><strong>Q: ${item.question}</strong></p>
+                  <p class="text-red-600">Selected: ${item.selected}</p>
+                  <p class="text-green-600">Correct: ${item.correct}</p>
+                </div>
+              `).join('')}
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error loading results:', error);
+      }
+    }
+    loadResults();
+  </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Entrance Practice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4 text-center">Common Entrance Practice</h1>
+    <div id="quiz-container">
+      <h2 id="question" class="text-lg font-semibold mb-4"></h2>
+      <div id="timer" class="text-center mb-4 text-gray-600">Time left: <span id="time-remaining">30</span>s</div>
+      <div id="options" class="space-y-2"></div>
+      <div id="feedback" class="mt-4 text-center hidden"></div>
+      <button id="submit-btn" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded w-full hover:bg-blue-600" onclick="checkAnswer()">Submit</button>
+    </div>
+    <div id="result-container" class="hidden mt-4">
+      <h2 id="result" class="text-lg font-semibold mb-4">Quiz Completed!</h2>
+      <p id="score" class="mb-4"></p>
+      <div id="incorrect-answers" class="mb-4"></div>
+      <button id="restart-btn" class="bg-green-500 text-white px-4 py-2 rounded w-full hover:bg-green-600" onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      // Week 1: Circulatory System (10 questions)
+      { question: "What is the main function of the circulatory system?", options: ["To digest food", "To transport substances", "To produce energy", "To store water"], correct: 1 },
+      { question: "What is the liquid part of blood called?", options: ["Platelets", "Plasma", "Red blood cells", "White blood cells"], correct: 1 },
+      { question: "What do red blood cells carry around the body?", options: ["Carbon dioxide only", "Oxygen only", "Oxygen and carbon dioxide", "Water"], correct: 2 },
+      { question: "What is the role of white blood cells?", options: ["Carry oxygen", "Fight germs", "Clot blood", "Transport nutrients"], correct: 1 },
+      { question: "What helps blood to clot?", options: ["Platelets", "Plasma", "Red blood cells", "White blood cells"], correct: 0 },
+      { question: "What is the heart made of?", options: ["Bones", "Cardiac muscles", "Nerves", "Skin"], correct: 1 },
+      { question: "Which blood vessel carries blood away from the heart?", options: ["Veins", "Capillaries", "Arteries", "Lungs"], correct: 2 },
+      { question: "What separates the right and left sides of the heart?", options: ["Valve", "Septum", "Atrium", "Ventricle"], correct: 1 },
+      { question: "Which disease affects red blood cells and causes weakness?", options: ["Malaria", "Sickle cell", "Leukemia", "Hemophilia"], correct: 1 },
+      { question: "What causes anemia?", options: ["Too many white blood cells", "Lack of red blood cells", "Too much plasma", "Blocked arteries"], correct: 1 },
+      
+      // Week 2: Kinetic Theory of Matter (8 questions)
+      { question: "What is matter made of?", options: ["Tiny particles", "Big rocks", "Liquids only", "Gases only"], correct: 0 },
+      { question: "What happens to particles when heated?", options: ["They stop moving", "They move faster", "They disappear", "They shrink"], correct: 1 },
+      { question: "What state of matter has particles that are tightly packed?", options: ["Gas", "Liquid", "Solid", "Plasma"], correct: 2 },
+      { question: "What is melting?", options: ["Gas to liquid", "Solid to liquid", "Liquid to gas", "Solid to gas"], correct: 1 },
+      { question: "What is evaporation?", options: ["Liquid to gas", "Gas to liquid", "Solid to liquid", "Liquid to solid"], correct: 0 },
+      { question: "Which factor increases evaporation?", options: ["Smaller surface area", "Lower temperature", "More wind", "Less sunlight"], correct: 2 },
+      { question: "What is the difference between boiling and evaporation?", options: ["Boiling is slower", "Evaporation needs heat", "Boiling happens throughout the liquid", "Evaporation needs a vacuum"], correct: 2 },
+      { question: "Which substance can sublime?", options: ["Water", "Iodine", "Sugar", "Salt"], correct: 1 },
+      
+      // Week 3: Thermal Energy (8 questions)
+      { question: "What is thermal energy?", options: ["Sound energy", "Heat energy", "Light energy", "Electrical energy"], correct: 1 },
+      { question: "How is heat transferred in solids?", options: ["Convection", "Radiation", "Conduction", "Evaporation"], correct: 2 },
+      { question: "What is the instrument used to measure temperature?", options: ["Calorimeter", "Thermometer", "Barometer", "Hydrometer"], correct: 1 },
+      { question: "Which material conducts heat the fastest?", options: ["Copper", "Glass", "Styrofoam", "Wood"], correct: 0 },
+      { question: "How is heat from the sun transferred to Earth?", options: ["Conduction", "Convection", "Radiation", "Insulation"], correct: 2 },
+      { question: "What prevents heat loss in buildings?", options: ["Metal roofs", "Insulation", "Open windows", "Bright paint"], correct: 1 },
+      { question: "What is convection?", options: ["Heat transfer in solids", "Heat transfer in liquids or gases", "Heat transfer in a vacuum", "Heat loss prevention"], correct: 1 },
+      { question: "Which surface absorbs heat best?", options: ["White", "Black", "Silver", "Transparent"], correct: 1 },
+      
+      // Week 4: Sound Energy (8 questions)
+      { question: "What is sound caused by?", options: ["Light", "Vibrations", "Heat", "Electricity"], correct: 1 },
+      { question: "What is needed for sound to travel?", options: ["Vacuum", "Medium", "Darkness", "Magnetism"], correct: 1 },
+      { question: "What is an echo?", options: ["Loud music", "Reflected sound", "High-pitched sound", "Noise"], correct: 1 },
+      { question: "What is the difference between music and noise?", options: ["Music is louder", "Noise is pleasant", "Music has regular frequency", "Noise has melody"], correct: 2 },
+      { question: "Which medium does sound travel fastest through?", options: ["Air", "Water", "Steel", "Vacuum"], correct: 2 },
+      { question: "What part of the ear collects sound?", options: ["Pinna", "Eardrum", "Ossicles", "Auditory nerve"], correct: 0 },
+      { question: "What is the speed of sound in air?", options: ["1500 m/s", "330 m/s", "5000 m/s", "100 m/s"], correct: 1 },
+      { question: "What uses echolocation?", options: ["Bats", "Birds", "Fish", "Snakes"], correct: 0 },
+      
+      // Week 5: Reproductive Health (8 questions)
+      { question: "What is reproductive health?", options: ["Healthy eating", "Well-being of the reproductive system", "Exercising daily", "Avoiding infections"], correct: 1 },
+      { question: "How can you ensure reproductive health?", options: ["Eat sugary foods", "Keep private parts clean", "Avoid exercise", "Ignore check-ups"], correct: 1 },
+      { question: "What is a reproductive health problem?", options: ["Headache", "Unintended pregnancy", "Sore throat", "Broken bone"], correct: 1 },
+      { question: "What can cause painful periods?", options: ["Menstruation problems", "Malaria", "Anemia", "Leukemia"], correct: 0 },
+      { question: "What does genital counselling help with?", options: ["Learning math", "Promoting safe sexual practices", "Improving eyesight", "Building muscles"], correct: 1 },
+      { question: "What is female genital mutilation?", options: ["A healthy practice", "A harmful practice", "A type of exercise", "A medical check-up"], correct: 1 },
+      { question: "How can STIs be prevented?", options: ["Using protection", "Eating healthy", "Exercising daily", "Reading books"], correct: 0 },
+      { question: "What is a benefit of open communication?", options: ["Better grades", "Reduced shame about sexual health", "Faster running", "Improved handwriting"], correct: 1 },
+      
+      // Week 6: Abstinence (7 questions)
+      { question: "What is abstinence?", options: ["Eating healthy", "Avoiding harmful actions", "Exercising daily", "Studying hard"], correct: 1 },
+      { question: "What is lifelong abstinence?", options: ["Abstaining for a short time", "Abstaining for life", "Abstaining once a week", "Abstaining during school"], correct: 1 },
+      { question: "What is an advantage of abstinence?", options: ["Prevents STIs", "Increases stress", "Causes illness", "Reduces focus"], correct: 0 },
+      { question: "Why might adolescents not abstain?", options: ["They want good grades", "Peer pressure", "They eat healthy", "They exercise"], correct: 1 },
+      { question: "What is a myth about abstinence?", options: ["It prevents STIs", "It leads to marriage", "It promotes health", "It builds self-esteem"], correct: 1 },
+      { question: "What is periodic abstinence?", options: ["Abstaining forever", "Abstaining occasionally", "Abstaining during school", "Abstaining at night"], correct: 1 },
+      { question: "What does abstinence help maintain?", options: ["Parental trust", "School grades", "Physical strength", "Reading skills"], correct: 0 },
+      
+      // Week 7: Chemicals (7 questions)
+      { question: "What is a chemical?", options: ["A type of food", "A substance like a compound or element", "A kind of plant", "A form of energy"], correct: 1 },
+      { question: "Which is a non-toxic chemical?", options: ["Hydrochloric acid", "Sodium chloride", "Bromine chloride", "Concentrated alkali"], correct: 1 },
+      { question: "What is a safety precaution when handling chemicals?", options: ["Taste them", "Wear gloves", "Mix randomly", "Ignore labels"], correct: 1 },
+      { question: "What are agrochemicals used for?", options: ["Cooking", "Agriculture", "Cleaning", "Building"], correct: 1 },
+      { question: "Which chemical is used in cosmetics?", options: ["Sulphuric acid", "Mercury", "Nitrogen", "Oxygen"], correct: 1 },
+      { question: "What should you do if a chemical spills?", options: ["Ignore it", "Tell the instructor", "Mix it with water", "Taste it"], correct: 1 },
+      { question: "What is a laboratory chemical?", options: ["Sugar", "Methyl orange", "Water", "Salt"], correct: 1 },
+      
+      // Week 8: Compounds and Mixtures (7 questions)
+      { question: "What is a compound?", options: ["A single element", "Two or more elements chemically combined", "A mixture of gases", "A type of liquid"], correct: 1 },
+      { question: "What is an example of a mixture?", options: ["Water", "Air", "Table salt", "Sugar"], correct: 1 },
+      { question: "How can you separate sand from water?", options: ["Filtration", "Evaporation", "Distillation", "Crystallization"], correct: 0 },
+      { question: "What is the chemical formula for water?", options: ["NaCl", "H₂O", "CaCO₃", "SiO₂"], correct: 1 },
+      { question: "What method separates iron filings from sulphur?", options: ["Filtration", "Magnetic separation", "Evaporation", "Sublimation"], correct: 1 },
+      { question: "What is distillation used for?", options: ["Separating solids", "Recovering liquids", "Mixing compounds", "Heating gases"], correct: 1 },
+      { question: "What is a component of brass?", options: ["Copper", "Oxygen", "Carbon", "Nitrogen"], correct: 0 },
+      
+      // Week 9: Crude Oil and Petrochemicals (7 questions)
+      { question: "What is crude oil?", options: ["A type of water", "A mixture of hydrocarbons", "A solid mineral", "A gas"], correct: 1 },
+      { question: "What method is used to refine crude oil?", options: ["Filtration", "Fractional distillation", "Sublimation", "Crystallization"], correct: 1 },
+      { question: "What is a use of natural gas?", options: ["Cooking", "Building houses", "Making clothes", "Growing plants"], correct: 0 },
+      { question: "What is a petrochemical product?", options: ["Wood", "Plastic", "Glass", "Paper"], correct: 1 },
+      { question: "What is bitumen used for?", options: ["Cooking", "Road surfacing", "Drinking", "Cleaning"], correct: 1 },
+      { question: "What is naphtha used for?", options: ["Making plastics", "Refining to petrol", "Fertilizing crops", "Building houses"], correct: 1 },
+      { question: "Why is crude oil important to Nigeria?", options: ["Source of revenue", "Source of water", "Source of food", "Source of air"], correct: 0 },
+      
+      // Week 10: Rusting (6 questions)
+      { question: "What is rusting?", options: ["Burning of wood", "Iron reacting with air and water", "Melting of metal", "Freezing of water"], correct: 1 },
+      { question: "What is needed for rusting to occur?", options: ["Air and fire", "Water and air", "Heat and light", "Sand and water"], correct: 1 },
+      { question: "How can rusting be prevented?", options: ["Washing", "Painting", "Heating", "Freezing"], correct: 1 },
+      { question: "What is an effect of rusting?", options: ["Better appearance", "Poor conduction of electricity", "Stronger metals", "Faster machines"], correct: 1 },
+      { question: "How is rusting different from burning?", options: ["Rusting is faster", "Burning needs water", "Rusting needs water", "Burning is slower"], correct: 2 },
+      { question: "What do rusting and respiration have in common?", options: ["Both produce water", "Both use oxygen", "Both need food", "Both are fast"], correct: 1 }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+    let feedbackShown = false;
+    let incorrectAnswers = [];
+    let timerId = null;
+    const TIME_PER_QUESTION = 30; // Seconds per question
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function startTimer() {
+      let timeLeft = TIME_PER_QUESTION;
+      const timeDisplay = document.getElementById('time-remaining');
+      timeDisplay.innerText = timeLeft;
+      timerId = setInterval(() => {
+        timeLeft--;
+        timeDisplay.innerText = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timerId);
+          // If no answer selected, mark as incorrect
+          if (!feedbackShown) {
+            const q = questions[currentQuestion];
+            incorrectAnswers.push({
+              question: q.question,
+              selected: 'None',
+              correct: q.options[q.correct]
+            });
+            const feedbackDiv = document.getElementById('feedback');
+            feedbackDiv.classList.remove('hidden');
+            feedbackDiv.innerText = `Time's up! The correct answer is "${q.options[q.correct]}".`;
+            feedbackDiv.className = 'mt-4 text-center text-red-600 font-semibold';
+            document.getElementById('submit-btn').innerText = 'Next';
+            document.getElementById('submit-btn').onclick = nextQuestion;
+            feedbackShown = true;
+            const optionButtons = document.getElementById('options').children;
+            for (let btn of optionButtons) {
+              btn.disabled = true;
+              btn.classList.remove('hover:bg-gray-300');
+            }
+          }
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+      }
+    }
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('question').innerText = q.question;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full bg-gray-200 text-left px-4 py-2 rounded hover:bg-gray-300';
+        btn.innerText = option;
+        btn.onclick = () => selectOption(index, btn);
+        optionsDiv.appendChild(btn);
+      });
+      document.getElementById('submit-btn').innerText = 'Submit';
+      document.getElementById('submit-btn').disabled = true;
+      document.getElementById('submit-btn').onclick = checkAnswer;
+      document.getElementById('feedback').classList.add('hidden');
+      feedbackShown = false;
+      startTimer();
+    }
+
+    function selectOption(index, button) {
+      if (!feedbackShown) {
+        selectedAnswer = index;
+        const buttons = document.getElementById('options').children;
+        for (let btn of buttons) {
+          btn.classList.remove('bg-blue-300');
+        }
+        button.classList.add('bg-blue-300');
+        document.getElementById('submit-btn').disabled = false;
+      }
+    }
+
+    function checkAnswer() {
+      if (!feedbackShown) {
+        const q = questions[currentQuestion];
+        const feedbackDiv = document.getElementById('feedback');
+        feedbackDiv.classList.remove('hidden');
+        
+        if (selectedAnswer === q.correct) {
+          feedbackDiv.innerText = 'Correct!';
+          feedbackDiv.className = 'mt-4 text-center text-green-600 font-semibold';
+          score++;
+        } else {
+          feedbackDiv.innerText = `Incorrect. The correct answer is "${q.options[q.correct]}".`;
+          feedbackDiv.className = 'mt-4 text-center text-red-600 font-semibold';
+          incorrectAnswers.push({
+            question: q.question,
+            selected: selectedAnswer !== null ? q.options[selectedAnswer] : 'None',
+            correct: q.options[q.correct]
+          });
+        }
+
+        // Disable option buttons after submission
+        const optionButtons = document.getElementById('options').children;
+        for (let btn of optionButtons) {
+          btn.disabled = true;
+          btn.classList.remove('hover:bg-gray-300');
+        }
+
+        // Change Submit button to Next
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.innerText = 'Next';
+        submitBtn.onclick = nextQuestion;
+        feedbackShown = true;
+        stopTimer();
+      }
+    }
+
+    function nextQuestion() {
+      stopTimer();
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+        selectedAnswer = null;
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      stopTimer();
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('result-container').classList.remove('hidden');
+      document.getElementById('score').innerText = `You scored ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(1)}%)`;
+      
+      const incorrectDiv = document.getElementById('incorrect-answers');
+      incorrectDiv.innerHTML = '<h3 class="text-lg font-semibold mb-2">Incorrect Answers:</h3>';
+      if (incorrectAnswers.length === 0) {
+        incorrectDiv.innerHTML += '<p class="text-gray-600">No incorrect answers! Great job!</p>';
+      } else {
+        incorrectAnswers.forEach((item, index) => {
+          incorrectDiv.innerHTML += `
+            <div class="mb-2">
+              <p><strong>${index + 1}. ${item.question}</strong></p>
+              <p class="text-red-600">Your answer: ${item.selected}</p>
+              <p class="text-green-600">Correct answer: ${item.correct}</p>
+            </div>
+          `;
+        });
+      }
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      selectedAnswer = null;
+      feedbackShown = false;
+      incorrectAnswers = [];
+      // Create a new shuffled copy of questions
+      shuffleArray(questions);
+      document.getElementById('quiz-container').classList.remove('hidden');
+      document.getElementById('result-container').classList.add('hidden');
+      loadQuestion();
+    }
+
+    // Initialize quiz with shuffled questions
+    shuffleArray(questions);
+    loadQuestion();
+  </script>
+</body>
+</html>
