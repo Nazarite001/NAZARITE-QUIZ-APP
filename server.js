@@ -27,6 +27,14 @@ const resultSchema = new mongoose.Schema({
   }],
   timestamp: String
 });
+const studentIdSchema = new mongoose.Schema({
+  studentId: String,
+  used: { type: Boolean, default: false }
+});
+
+const StudentId = mongoose.model('StudentId', studentIdSchema, 'students');
+
+
 
 const Result = mongoose.model('Result', resultSchema);
 
@@ -40,18 +48,40 @@ app.post('/api/quiz/results', async (req, res) => {
   }
 });
 
-app.get('/api/quiz/results', async (req, res) => {
+
+app.post('/api/quiz/validate', async (req, res) => {
+  const { studentId } = req.body;
+
   try {
-    const results = await Result.find().sort({ timestamp: -1 });
-    res.json(results);
+    const student = await StudentId.findOne({ studentId });
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student ID not found.' });
+    }
+
+    res.status(200).json({ message: 'Student ID is valid.' });
   } catch (error) {
-    res.status(500).send('Error fetching results');
+    res.status(500).json({ message: 'Server error.', error });
   }
 });
+
+
+
+app.get('/api/quiz/check-student/:studentId', async (req, res) => {
+  const studentId = req.params.studentId;
+  const student = await StudentId.findOne({ studentId }); // ✅ fixed line
+
+  if (student) {
+    res.json({ valid: true });
+  } else {
+    res.json({ valid: false });
+  }
+});
+
 
 app.get('/teacher', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'teacher.html'));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
