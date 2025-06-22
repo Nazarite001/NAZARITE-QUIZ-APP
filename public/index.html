@@ -12,7 +12,7 @@
     <!-- App Title -->
     <div class="text-center mb-6">
       <h1 class="title">Nazarite Tech Quiz App</h1>
-      <p class="subtitle">BASIC SCIENCE PRACTICE QUESTIONS </p>
+      <p class="subtitle">SOCIAL STUDIES PRACTICE QUESTIONS </p>
     </div>
 <div id="splash-screen" class="fixed inset-0 bg-white flex flex-col justify-center items-center z-50">
   <h1 class="text-3xl font-bold text-blue-600 mb-2">Welcome to</h1>
@@ -30,16 +30,14 @@
       <label for="topic-select" class="form-label">Select Topic</label>
       <select id="topic-select" class="form-input">
         <option value="all">All Topics</option>
-        <option value="Circulatory System">Circulatory System</option>
-        <option value="Kinetic Theory of Matter">Kinetic Theory of Matter</option>
-        <option value="Thermal Energy">Thermal Energy</option>
-        <option value="Sound Energy">Sound Energy</option>
-        <option value="Reproductive Health">Reproductive Health</option>
-        <option value="Abstinence">Abstinence</option>
-        <option value="Chemicals">Chemicals</option>
-        <option value="Compounds and Mixtures">Compounds and Mixtures</option>
-        <option value="Crude Oil and Petrochemicals">Crude Oil and Petrochemicals</option>
-        <option value="Rusting">Rusting</option>
+        <option value="Science and Technology I">Science and Technology I</option>
+        <option value="Science and Technology II">Science and Technology II</option>
+        <option value="Science and Technology III">Science and Technology III</option>
+        <option value="Science and Technology IV">Science and Technology IV</option>
+        <option value="Assertiveness">Assertiveness</option>
+        <option value="National Economy I - Savings">National Economy I - Savings</option>
+        <option value="National Economy II - Communication">National Economy II - Communication</option>
+        <option value="Finding Help">Finding Help</option>
       </select>
 
       <button id="start-btn" class="btn-primary">Start Quiz</button>
@@ -73,101 +71,91 @@
 
   <script>
     const questions = [
-      // Week 1: Circulatory System (10 questions)
-      { question: "What is the main function of the circulatory system?", options: ["To digest food", "To transport substances", "To produce energy", "To store water"], correct: 1, topic: "Circulatory System" },
-      { question: "What is the liquid part of blood called?", options: ["Platelets", "Plasma", "Red blood cells", "White blood cells"], correct: 1, topic: "Circulatory System" },
-      { question: "What do red blood cells carry around the body?", options: ["Carbon dioxide only", "Oxygen only", "Oxygen and carbon dioxide", "Water"], correct: 2, topic: "Circulatory System" },
-      { question: "What is the role of white blood cells?", options: ["Carry oxygen", "Fight germs", "Clot blood", "Transport nutrients"], correct: 1, topic: "Circulatory System" },
-      { question: "What helps blood to clot?", options: ["Platelets", "Plasma", "Red blood cells", "White blood cells"], correct: 0, topic: "Circulatory System" },
-      { question: "What is the heart made of?", options: ["Bones", "Cardiac muscles", "Nerves", "Skin"], correct: 1, topic: "Circulatory System" },
-      { question: "Which blood vessel carries blood away from the heart?", options: ["Veins", "Capillaries", "Arteries", "Lungs"], correct: 2, topic: "Circulatory System" },
-      { question: "What separates the right and left sides of the heart?", options: ["Valve", "Septum", "Atrium", "Ventricle"], correct: 1, topic: "Circulatory System" },
-      { question: "Which disease affects red blood cells and causes weakness?", options: ["Malaria", "Sickle cell", "Leukemia", "Hemophilia"], correct: 1, topic: "Circulatory System" },
-      { question: "What causes anemia?", options: ["Too many white blood cells", "Lack of red blood cells", "Too much plasma", "Blocked arteries"], correct: 1, topic: "Circulatory System" },
-      
-      // Week 2: Kinetic Theory of Matter (8 questions)
-      { question: "What is matter made of?", options: ["Tiny particles", "Big rocks", "Liquids only", "Gases only"], correct: 0, topic: "Kinetic Theory of Matter" },
-      { question: "What happens to particles when heated?", options: ["They stop moving", "They move faster", "They disappear", "They shrink"], correct: 1, topic: "Kinetic Theory of Matter" },
-      { question: "What state of matter has particles that are tightly packed?", options: ["Gas", "Liquid", "Solid", "Plasma"], correct: 2, topic: "Kinetic Theory of Matter" },
-      { question: "What is melting?", options: ["Gas to liquid", "Solid to liquid", "Liquid to gas", "Solid to gas"], correct: 1, topic: "Kinetic Theory of Matter" },
-      { question: "What is evaporation?", options: ["Liquid to gas", "Gas to liquid", "Solid to liquid", "Liquid to solid"], correct: 0, topic: "Kinetic Theory of Matter" },
-      { question: "Which factor increases evaporation?", options: ["Smaller surface area", "Lower temperature", "More wind", "Less sunlight"], correct: 2, topic: "Kinetic Theory of Matter" },
-      { question: "What is the difference between boiling and evaporation?", options: ["Boiling is slower", "Evaporation needs heat", "Boiling happens throughout the liquid", "Evaporation needs a vacuum"], correct: 2, topic: "Kinetic Theory of Matter" },
-      { question: "Which substance can sublime?", options: ["Water", "Iodine", "Sugar", "Salt"], correct: 1, topic: "Kinetic Theory of Matter" },
-      
-      // Week 3: Thermal Energy (8 questions)
-      { question: "What is thermal energy?", options: ["Sound energy", "Heat energy", "Light energy", "Electrical energy"], correct: 1, topic: "Thermal Energy" },
-      { question: "How is heat transferred in solids?", options: ["Convection", "Radiation", "Conduction", "Evaporation"], correct: 2, topic: "Thermal Energy" },
-      { question: "What is the instrument used to measure temperature?", options: ["Calorimeter", "Thermometer", "Barometer", "Hydrometer"], correct: 1, topic: "Thermal Energy" },
-      { question: "Which material conducts heat the fastest?", options: ["Copper", "Glass", "Styrofoam", "Wood"], correct: 0, topic: "Thermal Energy" },
-      { question: "How is heat from the sun transferred to Earth?", options: ["Conduction", "Convection", "Radiation", "Insulation"], correct: 2, topic: "Thermal Energy" },
-      { question: "What prevents heat loss in buildings?", options: ["Metal roofs", "Insulation", "Open windows", "Bright paint"], correct: 1, topic: "Thermal Energy" },
-      { question: "What is convection?", options: ["Heat transfer in solids", "Heat transfer in liquids or gases", "Heat transfer in a vacuum", "Heat loss prevention"], correct: 1, topic: "Thermal Energy" },
-      { question: "Which surface absorbs heat best?", options: ["White", "Black", "Silver", "Transparent"], correct: 1, topic: "Thermal Energy" },
-      
-      // Week 4: Sound Energy (8 questions)
-      { question: "What is sound caused by?", options: ["Light", "Vibrations", "Heat", "Electricity"], correct: 1, topic: "Sound Energy" },
-      { question: "What is needed for sound to travel?", options: ["Vacuum", "Medium", "Darkness", "Magnetism"], correct: 1, topic: "Sound Energy" },
-      { question: "What is an echo?", options: ["Loud music", "Reflected sound", "High-pitched sound", "Noise"], correct: 1, topic: "Sound Energy" },
-      { question: "What is the difference between music and noise?", options: ["Music is louder", "Noise is pleasant", "Music has regular frequency", "Noise has melody"], correct: 2, topic: "Sound Energy" },
-      { question: "Which medium does sound travel fastest through?", options: ["Air", "Water", "Steel", "Vacuum"], correct: 2, topic: "Sound Energy" },
-      { question: "What part of the ear collects sound?", options: ["Pinna", "Eardrum", "Ossicles", "Auditory nerve"], correct: 0, topic: "Sound Energy" },
-      { question: "What is the speed of sound in air?", options: ["1500 m/s", "330 m/s", "5000 m/s", "100 m/s"], correct: 1, topic: "Sound Energy" },
-      { question: "What uses echolocation?", options: ["Bats", "Birds", "Fish", "Snakes"], correct: 0, topic: "Sound Energy" },
-      
-      // Week 5: Reproductive Health (8 questions)
-      { question: "What is reproductive health?", options: ["Healthy eating", "Well-being of the reproductive system", "Exercising daily", "Avoiding infections"], correct: 1, topic: "Reproductive Health" },
-      { question: "How can you ensure reproductive health?", options: ["Eat sugary foods", "Keep private parts clean", "Avoid exercise", "Ignore check-ups"], correct: 1, topic: "Reproductive Health" },
-      { question: "What is a reproductive health problem?", options: ["Headache", "Unintended pregnancy", "Sore throat", "Broken bone"], correct: 1, topic: "Reproductive Health" },
-      { question: "What can cause painful periods?", options: ["Menstruation problems", "Malaria", "Anemia", "Leukemia"], correct: 0, topic: "Reproductive Health" },
-      { question: "What does genital counselling help with?", options: ["Learning math", "Promoting safe sexual practices", "Improving eyesight", "Building muscles"], correct: 1, topic: "Reproductive Health" },
-      { question: "What is female genital mutilation?", options: ["A healthy practice", "A harmful practice", "A type of exercise", "A medical check-up"], correct: 1, topic: "Reproductive Health" },
-      { question: "How can STIs be prevented?", options: ["Using protection", "Eating healthy", "Exercising daily", "Reading books"], correct: 0, topic: "Reproductive Health" },
-      { question: "What is a benefit of open communication?", options: ["Better grades", "Reduced shame about sexual health", "Faster running", "Improved handwriting"], correct: 1, topic: "Reproductive Health" },
-      
-      // Week 6: Abstinence (7 questions)
-      { question: "What is abstinence?", options: ["Eating healthy", "Avoiding harmful actions", "Exercising daily", "Studying hard"], correct: 1, topic: "Abstinence" },
-      { question: "What is lifelong abstinence?", options: ["Abstaining for a short time", "Abstaining for life", "Abstaining once a week", "Abstaining during school"], correct: 1, topic: "Abstinence" },
-      { question: "What is an advantage of abstinence?", options: ["Prevents STIs", "Increases stress", "Causes illness", "Reduces focus"], correct: 0, topic: "Abstinence" },
-      { question: "Why might adolescents not abstain?", options: ["They want good grades", "Peer pressure", "They eat healthy", "They exercise"], correct: 1, topic: "Abstinence" },
-      { question: "What is a myth about abstinence?", options: ["It prevents STIs", "It leads to marriage", "It promotes health", "It builds self-esteem"], correct: 1, topic: "Abstinence" },
-      { question: "What is periodic abstinence?", options: ["Abstaining forever", "Abstaining occasionally", "Abstaining during school", "Abstaining at night"], correct: 1, topic: "Abstinence" },
-      { question: "What does abstinence help maintain?", options: ["Parental trust", "School grades", "Physical strength", "Reading skills"], correct: 0, topic: "Abstinence" },
-      
-      // Week 7: Chemicals (7 questions)
-      { question: "What is a chemical?", options: ["A type of food", "A substance like a compound or element", "A kind of plant", "A form of energy"], correct: 1, topic: "Chemicals" },
-      { question: "Which is a non-toxic chemical?", options: ["Hydrochloric acid", "Sodium chloride", "Bromine chloride", "Concentrated alkali"], correct: 1, topic: "Chemicals" },
-      { question: "What is a safety precaution when handling chemicals?", options: ["Taste them", "Wear gloves", "Mix randomly", "Ignore labels"], correct: 1, topic: "Chemicals" },
-      { question: "What are agrochemicals used for?", options: ["Cooking", "Agriculture", "Cleaning", "Building"], correct: 1, topic: "Chemicals" },
-      { question: "Which chemical is used in cosmetics?", options: ["Sulphuric acid", "Mercury", "Nitrogen", "Oxygen"], correct: 1, topic: "Chemicals" },
-      { question: "What should you do if a chemical spills?", options: ["Ignore it", "Tell the instructor", "Mix it with water", "Taste it"], correct: 1, topic: "Chemicals" },
-      { question: "What is a laboratory chemical?", options: ["Sugar", "Methyl orange", "Water", "Salt"], correct: 1, topic: "Chemicals" },
-      
-      // Week 8: Compounds and Mixtures (7 questions)
-      { question: "What is a compound?", options: ["A single element", "Two or more elements chemically combined", "A mixture of gases", "A type of liquid"], correct: 1, topic: "Compounds and Mixtures" },
-      { question: "What is an example of a mixture?", options: ["Water", "Air", "Table salt", "Sugar"], correct: 1, topic: "Compounds and Mixtures" },
-      { question: "How can you separate sand from water?", options: ["Filtration", "Evaporation", "Distillation", "Crystallization"], correct: 0, topic: "Compounds and Mixtures" },
-      { question: "What is the chemical formula for water?", options: ["NaCl", "H₂O", "CaCO₃", "SiO₂"], correct: 1, topic: "Compounds and Mixtures" },
-      { question: "What method separates iron filings from sulphur?", options: ["Filtration", "Magnetic separation", "Evaporation", "Sublimation"], correct: 1, topic: "Compounds and Mixtures" },
-      { question: "What is distillation used for?", options: ["Separating solids", "Recovering liquids", "Mixing compounds", "Heating gases"], correct: 1, topic: "Compounds and Mixtures" },
-      { question: "What is a component of brass?", options: ["Copper", "Oxygen", "Carbon", "Nitrogen"], correct: 0, topic: "Compounds and Mixtures" },
-      
-      // Week 9: Crude Oil and Petrochemicals (7 questions)
-      { question: "What is crude oil?", options: ["A type of water", "A mixture of hydrocarbons", "A solid mineral", "A gas"], correct: 1, topic: "Crude Oil and Petrochemicals" },
-      { question: "What method is used to refine crude oil?", options: ["Filtration", "Fractional distillation", "Sublimation", "Crystallization"], correct: 1, topic: "Crude Oil and Petrochemicals" },
-      { question: "What is a use of natural gas?", options: ["Cooking", "Building houses", "Making clothes", "Growing plants"], correct: 0, topic: "Crude Oil and Petrochemicals" },
-      { question: "What is a petrochemical product?", options: ["Wood", "Plastic", "Glass", "Paper"], correct: 1, topic: "Crude Oil and Petrochemicals" },
-      { question: "What is bitumen used for?", options: ["Cooking", "Road surfacing", "Drinking", "Cleaning"], correct: 1, topic: "Crude Oil and Petrochemicals" },
-      { question: "What is naphtha used for?", options: ["Making plastics", "Refining to petrol", "Fertilizing crops", "Building houses"], correct: 1, topic: "Crude Oil and Petrochemicals" },
-      { question: "Why is crude oil important to Nigeria?", options: ["Source of revenue", "Source of water", "Source of food", "Source of air"], correct: 0, topic: "Crude Oil and Petrochemicals" },
-      
-      // Week 10: Rusting (6 questions)
-      { question: "What is rusting?", options: ["Burning of wood", "Iron reacting with air and water", "Melting of metal", "Freezing of water"], correct: 1, topic: "Rusting" },
-      { question: "What is needed for rusting to occur?", options: ["Air and fire", "Water and air", "Heat and light", "Sand and water"], correct: 1, topic: "Rusting" },
-      { question: "How can rusting be prevented?", options: ["Washing", "Painting", "Heating", "Freezing"], correct: 1, topic: "Rusting" },
-      { question: "What is an effect of rusting?", options: ["Better appearance", "Poor conduction of electricity", "Stronger metals", "Faster machines"], correct: 1, topic: "Rusting" },
-      { question: "How is rusting different from burning?", options: ["Rusting is faster", "Burning needs water", "Rusting needs water", "Burning is slower"], correct: 2, topic: "Rusting" },
-      { question: "What do rusting and respiration have in common?", options: ["Both produce water", "Both use oxygen", "Both need food", "Both are fast"], correct: 1, topic: "Rusting" }
+      // Week 1: Science and Technology I (8 questions)
+      { question: "What is science defined as?", options: ["Making tools", "Systematic study of nature", "Building machines", "Using computers"], correct: 1, topic: "Science and Technology I" },
+      { question: "What is technology?", options: ["Study of stars", "Application of scientific knowledge", "Writing theories", "Observing nature"], correct: 1, topic: "Science and Technology I" },
+      { question: "What is the first step in the scientific method?", options: ["Formulating a hypothesis", "Testing the hypothesis", "Recognizing a problem", "Drawing a conclusion"], correct: 2, topic: "Science and Technology I" },
+      { question: "How has science and technology improved healthcare?", options: ["Increased diseases", "Prevented and cured diseases", "Reduced medicine availability", "Made surgeries impossible"], correct: 1, topic: "Science and Technology I" },
+      { question: "What is a problem caused by science and technology?", options: ["Improved communication", "Air and water pollution", "Better transportation", "Increased food production"], correct: 1, topic: "Science and Technology I" },
+      { question: "What solution reduces pollution from science and technology?", options: ["Recycling", "Burning waste", "Using more fuel", "Increasing wars"], correct: 0, topic: "Science and Technology I" },
+      { question: "What is the relationship between science and technology?", options: ["They are unrelated", "Science uses technology as raw material", "Technology is the raw material for science", "Both use systematic methods"], correct: 3, topic: "Science and Technology I" },
+      { question: "What makes a hypothesis a scientific theory?", options: ["It is published and accepted", "It is guessed", "It is ignored", "It is written down"], correct: 0, topic: "Science and Technology I" },
+
+      // Week 2: Science and Technology II (8 questions)
+      { question: "What are traditional societies?", options: ["Modern cities", "Communities before British arrival in Nigeria", "Industrial areas", "Urban settlements"], correct: 1, topic: "Science and Technology II" },
+      { question: "What is a characteristic of traditional societies?", options: ["Use of machines", "Agrarian nature", "High literacy", "No superstitious beliefs"], correct: 1, topic: "Science and Technology II" },
+      { question: "What is an example of traditional science and technology?", options: ["Using computers", "Smelting iron ore", "Building skyscrapers", "Flying aeroplanes"], correct: 1, topic: "Science and Technology II" },
+      { question: "What is an advantage of traditional science and technology?", options: ["Uses imported materials", "Suits local economic conditions", "Requires formal education", "Is scientifically explained"], correct: 1, topic: "Science and Technology II" },
+      { question: "Why is traditional technology phasing out?", options: ["It is more effective", "Influence of modern science and technology", "It is well-documented", "It is cheaper"], correct: 1, topic: "Science and Technology II" },
+      { question: "How has modernization affected traditional transportation?", options: ["Increased use of camels", "Introduced cars and aeroplanes", "Promoted trekking", "Used more canoes"], correct: 1, topic: "Science and Technology II" },
+      { question: "What is a difference between traditional and modern technology?", options: ["Traditional uses high technology", "Modern requires no education", "Traditional uses crude implements", "Modern is limited to Africa"], correct: 2, topic: "Science and Technology II" },
+      { question: "What was used to make pots in traditional societies?", options: ["Plastic", "Clay", "Steel", "Glass"], correct: 1, topic: "Science and Technology II" },
+
+      // Week 3: Science and Technology III (8 questions)
+      { question: "What are home appliances?", options: ["Tools for farming", "Instruments that make life comfortable", "Machines for offices", "Devices for transportation"], correct: 1, topic: "Science and Technology III" },
+      { question: "What is the use of a clothes dryer?", options: ["Cooks food", "Dries clothes", "Washes dishes", "Toasts bread"], correct: 1, topic: "Science and Technology III" },
+      { question: "What does a microwave oven use to heat food?", options: ["Steam", "Microwaves", "Fire", "Hot air"], correct: 1, topic: "Science and Technology III" },
+      { question: "What is a danger of wrong use of appliances?", options: ["Improved efficiency", "Fire outbreak", "Better performance", "Cost savings"], correct: 1, topic: "Science and Technology III" },
+      { question: "What injury can result from wrong appliance use?", options: ["Burns", "Better health", "Stronger bones", "Improved vision"], correct: 0, topic: "Science and Technology III" },
+      { question: "What appliance is used to iron clothes?", options: ["Toaster", "Electric iron", "Blender", "Stove"], correct: 1, topic: "Science and Technology III" },
+      { question: "What is the function of a refrigerator?", options: ["Heats food", "Keeps food cool", "Mixes liquids", "Dries clothes"], correct: 1, topic: "Science and Technology III" },
+      { question: "What powers a dishwasher?", options: ["Manual effort", "Automatic washing", "Solar energy", "Wind energy"], correct: 1, topic: "Science and Technology III" },
+
+      // Week 4: Science and Technology IV (8 questions)
+      { question: "How can electrical appliances be wrongly used?", options: ["Following the manual", "Using with wet hands", "Regular maintenance", "Professional repairs"], correct: 1, topic: "Science and Technology IV" },
+      { question: "What can cause appliance breakdown?", options: ["Proper care", "Wrong use", "Reading manuals", "Timely repairs"], correct: 1, topic: "Science and Technology IV" },
+      { question: "What is a correct way to use electrical appliances?", options: ["Use when faulty", "Avoid maintenance", "Read the instruction manual", "Plug with wet hands"], correct: 2, topic: "Science and Technology IV" },
+      { question: "Who should repair faulty appliances?", options: ["Children", "Professionals", "Untrained users", "Neighbors"], correct: 1, topic: "Science and Technology IV" },
+      { question: "What should you avoid when plugging appliances?", options: ["Dry hands", "Wet hands", "Reading manuals", "Regular checks"], correct: 1, topic: "Science and Technology IV" },
+      { question: "What is a result of not maintaining appliances?", options: ["Longer lifespan", "Malfunction", "Better performance", "Lower costs"], correct: 1, topic: "Science and Technology IV" },
+      { question: "What should be done with faulty appliances?", options: ["Ignore them", "Repair or replace immediately", "Use them", "Store them"], correct: 1, topic: "Science and Technology IV" },
+      { question: "Why is regular maintenance important?", options: ["Increases faults", "Prevents dangers", "Raises costs", "Reduces efficiency"], correct: 1, topic: "Science and Technology IV" },
+
+      // Week 5: Assertiveness (10 questions)
+      { question: "What is assertiveness?", options: ["Ignoring others", "Communicating needs respectfully", "Being aggressive", "Manipulating people"], correct: 1, topic: "Assertiveness" },
+      { question: "What is passiveness?", options: ["Expressing needs clearly", "Not expressing needs", "Blaming others", "Using abusive language"], correct: 1, topic: "Assertiveness" },
+      { question: "What is an assertiveness skill?", options: ["Stating one's position", "Avoiding communication", "Criticizing others", "Hiding feelings"], correct: 0, topic: "Assertiveness" },
+      { question: "Why is assertiveness important?", options: ["Increases stress", "Improves communication", "Causes conflicts", "Reduces self-esteem"], correct: 1, topic: "Assertiveness" },
+      { question: "What behavior improves assertiveness?", options: ["Dishonesty", "Positive self-esteem", "Avoiding communication", "Breaking limits"], correct: 1, topic: "Assertiveness" },
+      { question: "What sexual situation requires assertiveness?", options: ["Setting boundaries", "Ignoring discomfort", "Avoiding consent", "Hiding preferences"], correct: 0, topic: "Assertiveness" },
+      { question: "What is an example of assertive behavior?", options: ["Saying 'NO' clearly", "Giving excuses", "Staying silent", "Agreeing reluctantly"], correct: 0, topic: "Assertiveness" },
+      { question: "What is a negative outcome of assertiveness?", options: ["Improved relationships", "Possible quarrels", "Reduced stress", "Better self-esteem"], correct: 1, topic: "Assertiveness" },
+      { question: "What factor influences assertiveness?", options: ["Fear of rejection", "Good health", "Physical strength", "Wealth"], correct: 0, topic: "Assertiveness" },
+      { question: "What is a consequence of non-assertive behavior?", options: ["Clear communication", "Feeling taken advantage of", "Strong relationships", "Reduced stress"], correct: 1, topic: "Assertiveness" },
+
+      // Week 6: National Economy I - Savings (10 questions)
+      { question: "What is savings?", options: ["Spending all income", "Keeping money aside for future use", "Borrowing money", "Lending money"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "Why do people save?", options: ["To increase debt", "For emergency funds", "To spend immediately", "To avoid banks"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "What was a traditional way of saving?", options: ["Using banks", "Burying money underground", "Buying stocks", "Using ATMs"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "What is a modern way of saving?", options: ["Keeping money in pots", "Co-operative societies", "Hiding under pillows", "Using money keepers"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "What is the role of a central bank?", options: ["Provides loans to individuals", "Manages national money supply", "Focuses on agriculture", "Offers mortgages"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "What is an advantage of keeping money in a bank?", options: ["High risk of theft", "Access to loans", "No privacy", "Difficult withdrawal"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "What is a problem of keeping money in a bank?", options: ["Easy access", "Low interest rates", "High returns", "No fees"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "How can bank fraud risk be reduced?", options: ["Use weak passwords", "Avoid two-factor authentication", "Use strong passwords", "Ignore account monitoring"], correct: 2, topic: "National Economy I - Savings" },
+      { question: "What type of bank supports farmers?", options: ["Merchant bank", "Agricultural credit bank", "Commercial bank", "Mortgage bank"], correct: 1, topic: "National Economy I - Savings" },
+      { question: "What is an example of a commercial bank in Nigeria?", options: ["Central Bank of Nigeria", "First Bank of Nigeria", "Bank of Industry", "Federal Mortgage Bank"], correct: 1, topic: "National Economy I - Savings" },
+
+      // Week 8: National Economy II - Communication (10 questions)
+      { question: "What is communication?", options: ["Keeping messages secret", "Passing messages from sender to receiver", "Avoiding interaction", "Using only computers"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is a traditional means of communication?", options: ["Telephone", "Town crier", "Email", "Newspapers"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is an advantage of traditional communication?", options: ["Slow pace", "No tech dependence", "High costs", "Limited reach"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is a disadvantage of modern communication?", options: ["Instant feedback", "High costs of devices", "Global reach", "Ease of use"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is telecommunication?", options: ["Face-to-face talking", "Electronic message transmission", "Writing letters", "Using drums"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is mass communication?", options: ["One-to-one messaging", "Disseminating information to many people", "Using smoke signals", "Personal emails"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is a form of ICT?", options: ["Town crier", "The Internet", "Flute", "Smoke signals"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is an advantage of ICT?", options: ["Health problems", "Faster communication", "Cyberbullying", "Digital divide"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What is a disadvantage of ICT?", options: ["Improved education", "Security risks", "Global connection", "Business efficiency"], correct: 1, topic: "National Economy II - Communication" },
+      { question: "What was the first post office in Nigeria opened in?", options: ["Abuja", "Lagos", "Kano", "Ibadan"], correct: 1, topic: "National Economy II - Communication" },
+
+      // Week 9: Finding Help (8 questions)
+      { question: "What is finding help?", options: ["Ignoring problems", "Seeking assistance for relief", "Avoiding support", "Creating problems"], correct: 1, topic: "Finding Help" },
+      { question: "When might people need help?", options: ["During success", "Unwanted pregnancy", "Winning exams", "Having many friends"], correct: 1, topic: "Finding Help" },
+      { question: "Who can provide help?", options: ["Strangers", "Counselors", "Enemies", "Robbers"], correct: 1, topic: "Finding Help" },
+      { question: "What skill is needed when seeking help?", options: ["Silence", "Good communication", "Aggressiveness", "Manipulation"], correct: 1, topic: "Finding Help" },
+      { question: "What is a hindrance to finding help?", options: ["Supportive friends", "Fear of judgment", "Trustworthy adults", "Clear information"], correct: 1, topic: "Finding Help" },
+      { question: "Why is finding help important?", options: ["Increases stress", "Improves mental health", "Causes loneliness", "Reduces confidence"], correct: 1, topic: "Finding Help" },
+      { question: "What step should be taken when help is needed?", options: ["Stay nervous", "Inform a trusted adult", "Hide the problem", "Avoid focus"], correct: 1, topic: "Finding Help" },
+      { question: "What is a characteristic of youth-friendly agencies?", options: ["High costs", "Confidential services", "Parental permission required", "No specialized services"], correct: 1, topic: "Finding Help" }
     ];
 
     let currentQuestion = 0;
