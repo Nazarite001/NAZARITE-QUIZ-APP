@@ -47,7 +47,7 @@
 
     <!-- Quiz Section -->
     <div id="quiz-container" class="hidden mt-6">
-      <div id="question-indicator" class="text-sm text-gray-600 text-center mb-2">Question 1 of 10</div>
+      <div id="question-counter" class="text-sm text-gray-600 text-right mb-2"></div>
 
       <div class="mb-4">
         <div class="progress-bar">
@@ -262,6 +262,9 @@
       feedbackShown = false;
       updateProgressBar();
       startTimer();
+      document.getElementById('question-counter').innerText = 
+  `Question ${currentQuestion + 1} of ${filteredQuestions.length}`;
+
     }
 
     function selectOption(index, button) {
@@ -442,8 +445,7 @@ window.addEventListener('load', () => {
   }, 4000); // Optional: Auto-hide after 4 seconds
 });
 
-document.getElementById('question-indicator').innerText = 
-  `Question ${currentQuestion + 1} of ${filteredQuestions.length}`;
+
 
     document.getElementById('start-btn').addEventListener('click', startQuiz);
   </script>
